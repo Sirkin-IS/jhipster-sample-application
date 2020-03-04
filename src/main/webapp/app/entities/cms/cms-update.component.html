@@ -1,0 +1,78 @@
+<div class="row justify-content-center">
+    <div class="col-8">
+        <form name="editForm" role="form" novalidate (ngSubmit)="save()" [formGroup]="editForm">
+            <h2 id="jhi-cms-heading">Create or edit a CMS</h2>
+
+            <div>
+                <jhi-alert-error></jhi-alert-error>
+
+                <div class="form-group" [hidden]="!editForm.get('id')!.value">
+                    <label for="id">ID</label>
+                    <input type="text" class="form-control" id="id" name="id" formControlName="id" readonly />
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" for="field_fileId">File Id</label>
+                    <input type="text" class="form-control" name="fileId" id="field_fileId"
+                           formControlName="fileId"/>
+                    <div *ngIf="editForm.get('fileId')!.invalid && (editForm.get('fileId')!.dirty || editForm.get('fileId')!.touched)">
+                        <small class="form-text text-danger"
+                               *ngIf="editForm.get('fileId')?.errors?.required">
+                        This field is required.
+                        </small>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" for="field_messageCount">Message Count</label>
+                    <input type="number" class="form-control" name="messageCount" id="field_messageCount"
+                           formControlName="messageCount"/>
+                    <div *ngIf="editForm.get('messageCount')!.invalid && (editForm.get('messageCount')!.dirty || editForm.get('messageCount')!.touched)">
+                        <small class="form-text text-danger"
+                               *ngIf="editForm.get('messageCount')?.errors?.required">
+                        This field is required.
+                        </small>
+                        <small class="form-text text-danger"
+                            [hidden]="!editForm.get('messageCount')?.errors?.number">
+                            This field should be a number.
+                        </small>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" for="field_createdAt">Created At</label>
+                    <div class="input-group">
+                        <input id="field_createdAt" type="text" class="form-control" name="createdAt" ngbDatepicker #createdAtDp="ngbDatepicker" formControlName="createdAt"/>
+                        <span class="input-group-append">
+                            <button type="button" class="btn btn-secondary" (click)="createdAtDp.toggle()"><fa-icon icon="calendar-alt"></fa-icon></button>
+                        </span>
+                    </div>
+                    <div *ngIf="editForm.get('createdAt')!.invalid && (editForm.get('createdAt')!.dirty || editForm.get('createdAt')!.touched)">
+                        <small class="form-text text-danger"
+                               *ngIf="editForm.get('createdAt')?.errors?.required">
+                        This field is required.
+                        </small>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" for="field_id">Id</label>
+                    <select class="form-control" id="field_id" name="id" formControlName="id">
+                        <option [ngValue]="null"></option>
+                        <option [ngValue]="logicalMessageOption.id === editForm.get('id')!.value?.id ? editForm.get('id')!.value : logicalMessageOption" *ngFor="let logicalMessageOption of logicalmessages; trackBy: trackById">{{ logicalMessageOption.id }}</option>
+                    </select>
+                </div>
+            </div>
+
+            <div>
+                <button type="button" id="cancel-save" class="btn btn-secondary" (click)="previousState()">
+                    <fa-icon icon="ban"></fa-icon>&nbsp;<span>Cancel</span>
+                </button>
+
+                <button type="submit" id="save-entity" [disabled]="editForm.invalid || isSaving" class="btn btn-primary">
+                    <fa-icon icon="save"></fa-icon>&nbsp;<span>Save</span>
+                </button>
+            </div>
+        </form>
+    </div>
+</div>

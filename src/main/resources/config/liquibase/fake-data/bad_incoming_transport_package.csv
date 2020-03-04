@@ -1,0 +1,11 @@
+id;transport_package_id;date;content;content_content_type;answer_code
+1;44672;2020-03-03;../fake-data/blob/hipster.png;image/png;68029
+2;80472;2020-03-03;../fake-data/blob/hipster.png;image/png;35268
+3;42689;2020-03-04;../fake-data/blob/hipster.png;image/png;87567
+4;47202;2020-03-04;../fake-data/blob/hipster.png;image/png;18853
+5;88744;2020-03-04;../fake-data/blob/hipster.png;image/png;13739
+6;29006;2020-03-03;../fake-data/blob/hipster.png;image/png;4206
+7;17248;2020-03-03;../fake-data/blob/hipster.png;image/png;4389
+8;60451;2020-03-04;../fake-data/blob/hipster.png;image/png;5181
+9;41734;2020-03-03;../fake-data/blob/hipster.png;image/png;89255
+10;35862;2020-03-03;../fake-data/blob/hipster.png;image/png;1279

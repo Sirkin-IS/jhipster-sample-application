@@ -1,0 +1,38 @@
+{
+    "name": "HbaseFile",
+    "fields": [
+        {
+            "fieldName": "fileId",
+            "fieldType": "Integer",
+            "fieldValidateRules": [
+                "required"
+            ]
+        },
+        {
+            "fieldName": "content",
+            "fieldType": "String",
+            "fieldValidateRules": [
+                "required"
+            ]
+        }
+    ],
+    "relationships": [
+        {
+            "relationshipType": "many-to-one",
+            "otherEntityName": "cMS",
+            "otherEntityRelationshipName": "fileId",
+            "relationshipName": "fileId",
+            "otherEntityField": "id"
+        }
+    ],
+    "changelogDate": "20200304080000",
+    "entityTableName": "hbase_file",
+    "dto": "no",
+    "pagination": "no",
+    "service": "no",
+    "jpaMetamodelFiltering": false,
+    "fluentMethods": true,
+    "readOnly": false,
+    "clientRootFolder": "",
+    "applications": "*"
+}

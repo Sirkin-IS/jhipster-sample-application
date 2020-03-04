@@ -1,0 +1,99 @@
+<div>
+    <h2 id="page-heading">
+        <span>Logical Messages</span>
+
+        <button id="jh-create-entity" class="btn btn-primary float-right jh-create-entity create-logical-message" [routerLink]="['/logical-message/new']">
+            <fa-icon icon="plus"></fa-icon>
+            <span>
+            Create a new Logical Message
+            </span>
+        </button>
+    </h2>
+
+    <jhi-alert-error></jhi-alert-error>
+
+    <jhi-alert></jhi-alert>
+
+    <div class="alert alert-warning" id="no-result" *ngIf="logicalMessages?.length === 0">
+        <span>No logicalMessages found</span>
+    </div>
+
+    <div class="table-responsive" id="entities" *ngIf="logicalMessages?.length > 0">
+        <table class="table table-striped" aria-describedby="page-heading">
+            <thead>
+                <tr>
+                    <th scope="col" ><span>ID</span></th>
+                    <th scope="col" ><span>Owner Id</span></th>
+                    <th scope="col" ><span>Document Id</span></th>
+                    <th scope="col" ><span>Event Id</span></th>
+                    <th scope="col" ><span>Direction Id</span></th>
+                    <th scope="col" ><span>Cms Id</span></th>
+                    <th scope="col" ><span>Cms Directory Name</span></th>
+                    <th scope="col" ><span>Transport Package Id</span></th>
+                    <th scope="col" ><span>Receipt Id</span></th>
+                    <th scope="col" ><span>Message Type Id</span></th>
+                    <th scope="col" ><span>Response Code</span></th>
+                    <th scope="col" ><span>Attemps</span></th>
+                    <th scope="col" ><span>Last Time Of Attemps</span></th>
+                    <th scope="col" ><span>Created At</span></th>
+                    <th scope="col" ><span>Updated At</span></th>
+                    <th scope="col" ><span>Transport Package Id</span></th>
+                    <th scope="col" ><span>Receipt Id</span></th>
+                    <th scope="col"></th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let logicalMessage of logicalMessages ;trackBy: trackId">
+                    <td><a [routerLink]="['/logical-message', logicalMessage.id, 'view']">{{ logicalMessage.id }}</a></td>
+                    <td>{{ logicalMessage.ownerId }}</td>
+                    <td>{{ logicalMessage.documentId }}</td>
+                    <td>{{ logicalMessage.eventId }}</td>
+                    <td>{{ logicalMessage.directionId }}</td>
+                    <td>{{ logicalMessage.cmsId }}</td>
+                    <td>{{ logicalMessage.cmsDirectoryName }}</td>
+                    <td>{{ logicalMessage.transportPackageId }}</td>
+                    <td>{{ logicalMessage.receiptId }}</td>
+                    <td>{{ logicalMessage.messageTypeId }}</td>
+                    <td>{{ logicalMessage.responseCode }}</td>
+                    <td>{{ logicalMessage.attemps }}</td>
+                    <td>{{ logicalMessage.lastTimeOfAttemps | date:'mediumDate' }}</td>
+                    <td>{{ logicalMessage.createdAt | date:'mediumDate' }}</td>
+                    <td>{{ logicalMessage.updatedAt | date:'mediumDate' }}</td>
+                    <td>
+                        <div *ngIf="logicalMessage.transportPackageId">
+                            <a [routerLink]="['/transport-package', logicalMessage.transportPackageId?.id, 'view']" >{{ logicalMessage.transportPackageId?.id }}</a>
+                        </div>
+                    </td>
+                    <td>
+                        <div *ngIf="logicalMessage.receiptId">
+                            <a [routerLink]="['/receipt', logicalMessage.receiptId?.id, 'view']" >{{ logicalMessage.receiptId?.id }}</a>
+                        </div>
+                    </td>
+                    <td class="text-right">
+                        <div class="btn-group">
+                            <button type="submit"
+                                    [routerLink]="['/logical-message', logicalMessage.id, 'view']"
+                                    class="btn btn-info btn-sm">
+                                <fa-icon icon="eye"></fa-icon>
+                                <span class="d-none d-md-inline">View</span>
+                            </button>
+
+                            <button type="submit"
+                                    [routerLink]="['/logical-message', logicalMessage.id, 'edit']"
+                                    class="btn btn-primary btn-sm">
+                                <fa-icon icon="pencil-alt"></fa-icon>
+                                <span class="d-none d-md-inline">Edit</span>
+                            </button>
+
+                            <button type="submit" (click)="delete(logicalMessage)"
+                                    class="btn btn-danger btn-sm">
+                                <fa-icon icon="times"></fa-icon>
+                                <span class="d-none d-md-inline">Delete</span>
+                            </button>
+                        </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>

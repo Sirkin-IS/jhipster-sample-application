@@ -1,0 +1,99 @@
+<div class="row justify-content-center">
+    <div class="col-8">
+        <form name="editForm" role="form" novalidate (ngSubmit)="save()" [formGroup]="editForm">
+            <h2 id="jhi-bad-incoming-transport-package-heading">Create or edit a Bad Incoming Transport Package</h2>
+
+            <div>
+                <jhi-alert-error></jhi-alert-error>
+
+                <div class="form-group" [hidden]="!editForm.get('id')!.value">
+                    <label for="id">ID</label>
+                    <input type="text" class="form-control" id="id" name="id" formControlName="id" readonly />
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" for="field_transportPackageId">Transport Package Id</label>
+                    <input type="number" class="form-control" name="transportPackageId" id="field_transportPackageId"
+                           formControlName="transportPackageId"/>
+                    <div *ngIf="editForm.get('transportPackageId')!.invalid && (editForm.get('transportPackageId')!.dirty || editForm.get('transportPackageId')!.touched)">
+                        <small class="form-text text-danger"
+                               *ngIf="editForm.get('transportPackageId')?.errors?.required">
+                        This field is required.
+                        </small>
+                        <small class="form-text text-danger"
+                            [hidden]="!editForm.get('transportPackageId')?.errors?.number">
+                            This field should be a number.
+                        </small>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" for="field_date">Date</label>
+                    <div class="input-group">
+                        <input id="field_date" type="text" class="form-control" name="date" ngbDatepicker #dateDp="ngbDatepicker" formControlName="date"/>
+                        <span class="input-group-append">
+                            <button type="button" class="btn btn-secondary" (click)="dateDp.toggle()"><fa-icon icon="calendar-alt"></fa-icon></button>
+                        </span>
+                    </div>
+                    <div *ngIf="editForm.get('date')!.invalid && (editForm.get('date')!.dirty || editForm.get('date')!.touched)">
+                        <small class="form-text text-danger"
+                               *ngIf="editForm.get('date')?.errors?.required">
+                        This field is required.
+                        </small>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" for="field_content">Content</label>
+                    <div>
+                        <div *ngIf="editForm.get('content')!.value" class="form-text text-danger clearfix">
+                            <a class="pull-left" (click)="openFile(editForm.get('contentContentType')!.value, editForm.get('content')!.value)">open</a><br>
+                            <span class="pull-left">{{ editForm.get('contentContentType')!.value }}, {{ byteSize(editForm.get('content')!.value) }}</span>
+                            <button type="button" (click)="editForm.patchValue({content: null});editForm.patchValue({contentContentType: null});"
+                                    class="btn btn-secondary btn-xs pull-right">
+                                <fa-icon icon="times"></fa-icon>
+                            </button>
+                        </div>
+                        <input type="file" id="file_content" (change)="setFileData($event, 'content', false)"/>
+                    </div>
+                    <input type="hidden" class="form-control" name="content" id="field_content"
+                           formControlName="content"/>
+                    <input type="hidden" class="form-control" name="contentContentType" id="field_contentContentType"
+                           formControlName="contentContentType" />
+                    <div *ngIf="editForm.get('content')!.invalid && (editForm.get('content')!.dirty || editForm.get('content')!.touched)">
+                        <small class="form-text text-danger"
+                               *ngIf="editForm.get('content')?.errors?.required">
+                        This field is required.
+                        </small>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" for="field_answerCode">Answer Code</label>
+                    <input type="number" class="form-control" name="answerCode" id="field_answerCode"
+                           formControlName="answerCode"/>
+                    <div *ngIf="editForm.get('answerCode')!.invalid && (editForm.get('answerCode')!.dirty || editForm.get('answerCode')!.touched)">
+                        <small class="form-text text-danger"
+                               *ngIf="editForm.get('answerCode')?.errors?.required">
+                        This field is required.
+                        </small>
+                        <small class="form-text text-danger"
+                            [hidden]="!editForm.get('answerCode')?.errors?.number">
+                            This field should be a number.
+                        </small>
+                    </div>
+                </div>
+            </div>
+
+            <div>
+                <button type="button" id="cancel-save" class="btn btn-secondary" (click)="previousState()">
+                    <fa-icon icon="ban"></fa-icon>&nbsp;<span>Cancel</span>
+                </button>
+
+                <button type="submit" id="save-entity" [disabled]="editForm.invalid || isSaving" class="btn btn-primary">
+                    <fa-icon icon="save"></fa-icon>&nbsp;<span>Save</span>
+                </button>
+            </div>
+        </form>
+    </div>
+</div>

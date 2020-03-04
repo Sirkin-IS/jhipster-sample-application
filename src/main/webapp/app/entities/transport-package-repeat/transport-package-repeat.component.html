@@ -1,0 +1,69 @@
+<div>
+    <h2 id="page-heading">
+        <span>Transport Package Repeats</span>
+
+        <button id="jh-create-entity" class="btn btn-primary float-right jh-create-entity create-transport-package-repeat" [routerLink]="['/transport-package-repeat/new']">
+            <fa-icon icon="plus"></fa-icon>
+            <span>
+            Create a new Transport Package Repeat
+            </span>
+        </button>
+    </h2>
+
+    <jhi-alert-error></jhi-alert-error>
+
+    <jhi-alert></jhi-alert>
+
+    <div class="alert alert-warning" id="no-result" *ngIf="transportPackageRepeats?.length === 0">
+        <span>No transportPackageRepeats found</span>
+    </div>
+
+    <div class="table-responsive" id="entities" *ngIf="transportPackageRepeats?.length > 0">
+        <table class="table table-striped" aria-describedby="page-heading">
+            <thead>
+                <tr>
+                    <th scope="col" ><span>ID</span></th>
+                    <th scope="col" ><span>Transport Package Id</span></th>
+                    <th scope="col" ><span>Repeat Num</span></th>
+                    <th scope="col" ><span>Created At</span></th>
+                    <th scope="col" ><span>Answer Code</span></th>
+                    <th scope="col" ><span>Answer Content</span></th>
+                    <th scope="col"></th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let transportPackageRepeat of transportPackageRepeats ;trackBy: trackId">
+                    <td><a [routerLink]="['/transport-package-repeat', transportPackageRepeat.id, 'view']">{{ transportPackageRepeat.id }}</a></td>
+                    <td>{{ transportPackageRepeat.transportPackageId }}</td>
+                    <td>{{ transportPackageRepeat.repeatNum }}</td>
+                    <td>{{ transportPackageRepeat.createdAt | date:'mediumDate' }}</td>
+                    <td>{{ transportPackageRepeat.answerCode }}</td>
+                    <td>{{ transportPackageRepeat.answerContent }}</td>
+                    <td class="text-right">
+                        <div class="btn-group">
+                            <button type="submit"
+                                    [routerLink]="['/transport-package-repeat', transportPackageRepeat.id, 'view']"
+                                    class="btn btn-info btn-sm">
+                                <fa-icon icon="eye"></fa-icon>
+                                <span class="d-none d-md-inline">View</span>
+                            </button>
+
+                            <button type="submit"
+                                    [routerLink]="['/transport-package-repeat', transportPackageRepeat.id, 'edit']"
+                                    class="btn btn-primary btn-sm">
+                                <fa-icon icon="pencil-alt"></fa-icon>
+                                <span class="d-none d-md-inline">Edit</span>
+                            </button>
+
+                            <button type="submit" (click)="delete(transportPackageRepeat)"
+                                    class="btn btn-danger btn-sm">
+                                <fa-icon icon="times"></fa-icon>
+                                <span class="d-none d-md-inline">Delete</span>
+                            </button>
+                        </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
