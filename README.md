@@ -1,10 +1,6 @@
-# jhipsterSampleApplication
+# blog
 
 This application was generated using JHipster 6.7.1, you can find documentation and help at [https://www.jhipster.tech/documentation-archive/v6.7.1](https://www.jhipster.tech/documentation-archive/v6.7.1).
-
-This is a "gateway" application intended to be part of a microservice architecture, please refer to the [Doing microservices with JHipster][] page of the documentation for more information.
-
-This application is configured for Service Discovery and Configuration with . On launch, it will refuse to start if it is not able to connect to .
 
 ## Development
 
@@ -20,10 +16,17 @@ You will only need to run this command when dependencies change in [package.json
 
 We use npm scripts and [Webpack][] as our build system.
 
+If you are using hazelcast as a cache, you will have to launch a cache server.
+To start your cache server, run:
+
+```
+docker-compose -f src/main/docker/hazelcast-management-center.yml up -d
+```
+
 Run the following commands in two separate terminals to create a blissful development experience where your browser
 auto-refreshes when files change on your hard drive.
 
-    ./gradlew -x webpack
+    ./mvnw
     npm start
 
 Npm is also used to manage CSS and JavaScript dependencies used in this application. You can upgrade dependencies by
@@ -61,48 +64,22 @@ To benefit from TypeScript type definitions from [DefinitelyTyped][] repository 
     npm install --save-dev --save-exact @types/leaflet
 
 Then you would import the JS and CSS files specified in library's installation instructions so that [Webpack][] knows about them:
-Edit [src/main/webapp/app/vendor.ts](src/main/webapp/app/vendor.ts) file:
-
-```
-import 'leaflet/dist/leaflet.js';
-```
-
-Edit [src/main/webapp/content/scss/vendor.scss](src/main/webapp/content/scss/vendor.scss) file:
-
-```
-@import '~leaflet/dist/leaflet.css';
-```
-
 Note: There are still a few other things remaining to do for Leaflet that we won't detail here.
 
 For further instructions on how to develop with JHipster, have a look at [Using JHipster in development][].
-
-### Using Angular CLI
-
-You can also use [Angular CLI][] to generate some custom client code.
-
-For example, the following command:
-
-    ng generate component my-component
-
-will generate few files:
-
-    create src/main/webapp/app/my-component/my-component.component.html
-    create src/main/webapp/app/my-component/my-component.component.ts
-    update src/main/webapp/app/app.module.ts
 
 ## Building for production
 
 ### Packaging as jar
 
-To build the final jar and optimize the jhipsterSampleApplication application for production, run:
+To build the final jar and optimize the blog application for production, run:
 
-    ./gradlew -Pprod clean bootJar
+    ./mvnw -Pprod clean verify
 
 This will concatenate and minify the client CSS and JavaScript files. It will also modify `index.html` so it references these new files.
 To ensure everything worked, run:
 
-    java -jar build/libs/*.jar
+    java -jar target/*.jar
 
 Then navigate to [http://localhost:8080](http://localhost:8080) in your browser.
 
@@ -112,13 +89,13 @@ Refer to [Using JHipster in production][] for more details.
 
 To package your application as a war in order to deploy it to an application server, run:
 
-    ./gradlew -Pprod -Pwar clean bootWar
+    ./mvnw -Pprod,war clean verify
 
 ## Testing
 
 To launch your application's tests, run:
 
-    ./gradlew test integrationTest jacocoTestReport
+    ./mvnw verify
 
 ### Client tests
 
@@ -136,13 +113,21 @@ Sonar is used to analyse code quality. You can start a local Sonar server (acces
 docker-compose -f src/main/docker/sonar.yml up -d
 ```
 
-You can run a Sonar analysis with using the [sonar-scanner](https://docs.sonarqube.org/display/SCAN/Analyzing+with+SonarQube+Scanner) or by using the gradle plugin.
+You can run a Sonar analysis with using the [sonar-scanner](https://docs.sonarqube.org/display/SCAN/Analyzing+with+SonarQube+Scanner) or by using the maven plugin.
 
 Then, run a Sonar analysis:
 
 ```
-./gradlew -Pprod clean check jacocoTestReport sonarqube
+./mvnw -Pprod clean verify sonar:sonar
 ```
+
+If you need to re-run the Sonar phase, please be sure to specify at least the `initialize` phase since Sonar properties are loaded from the sonar-project.properties file.
+
+```
+./mvnw initialize sonar:sonar
+```
+
+or
 
 For more information, refer to the [Code quality page][].
 
@@ -161,7 +146,7 @@ To stop it and remove the container, run:
 You can also fully dockerize your application and all the services that it depends on.
 To achieve this, first build a docker image of your app by running:
 
-    ./gradlew bootJar -Pprod jibDockerBuild
+    ./mvnw -Pprod verify jib:dockerBuild
 
 Then run:
 
@@ -175,7 +160,6 @@ To configure CI for your project, run the ci-cd sub-generator (`jhipster ci-cd`)
 
 [jhipster homepage and latest documentation]: https://www.jhipster.tech
 [jhipster 6.7.1 archive]: https://www.jhipster.tech/documentation-archive/v6.7.1
-[doing microservices with jhipster]: https://www.jhipster.tech/documentation-archive/v6.7.1/microservices-architecture/
 [using jhipster in development]: https://www.jhipster.tech/documentation-archive/v6.7.1/development/
 [using docker and docker-compose]: https://www.jhipster.tech/documentation-archive/v6.7.1/docker-compose
 [using jhipster in production]: https://www.jhipster.tech/documentation-archive/v6.7.1/production/
