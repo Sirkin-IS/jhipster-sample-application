@@ -1,0 +1,188 @@
+<div class="row justify-content-center">
+    <div class="col-8">
+        <form name="editForm" role="form" novalidate (ngSubmit)="save()" [formGroup]="editForm">
+            <h2 id="jhi-logical-message-heading">Create or edit a Logical Message</h2>
+
+            <div>
+                <jhi-alert-error></jhi-alert-error>
+
+                <div class="form-group" [hidden]="!editForm.get('id')!.value">
+                    <label for="id">ID</label>
+                    <input type="text" class="form-control" id="id" name="id" formControlName="id" readonly />
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" for="field_ownerId">Owner Id</label>
+                    <input type="number" class="form-control" name="ownerId" id="field_ownerId"
+                           formControlName="ownerId"/>
+                    <div *ngIf="editForm.get('ownerId')!.invalid && (editForm.get('ownerId')!.dirty || editForm.get('ownerId')!.touched)">
+                        <small class="form-text text-danger"
+                               *ngIf="editForm.get('ownerId')?.errors?.required">
+                        This field is required.
+                        </small>
+                        <small class="form-text text-danger"
+                            [hidden]="!editForm.get('ownerId')?.errors?.number">
+                            This field should be a number.
+                        </small>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" for="field_documentId">Document Id</label>
+                    <input type="text" class="form-control" name="documentId" id="field_documentId"
+                           formControlName="documentId"/>
+                    <div *ngIf="editForm.get('documentId')!.invalid && (editForm.get('documentId')!.dirty || editForm.get('documentId')!.touched)">
+                        <small class="form-text text-danger"
+                               *ngIf="editForm.get('documentId')?.errors?.required">
+                        This field is required.
+                        </small>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" for="field_eventId">Event Id</label>
+                    <input type="text" class="form-control" name="eventId" id="field_eventId"
+                           formControlName="eventId"/>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" for="field_directionId">Direction Id</label>
+                    <input type="number" class="form-control" name="directionId" id="field_directionId"
+                           formControlName="directionId"/>
+                    <div *ngIf="editForm.get('directionId')!.invalid && (editForm.get('directionId')!.dirty || editForm.get('directionId')!.touched)">
+                        <small class="form-text text-danger"
+                               *ngIf="editForm.get('directionId')?.errors?.required">
+                        This field is required.
+                        </small>
+                        <small class="form-text text-danger"
+                            [hidden]="!editForm.get('directionId')?.errors?.number">
+                            This field should be a number.
+                        </small>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" for="field_cmsId">Cms Id</label>
+                    <input type="text" class="form-control" name="cmsId" id="field_cmsId"
+                           formControlName="cmsId"/>
+                    <div *ngIf="editForm.get('cmsId')!.invalid && (editForm.get('cmsId')!.dirty || editForm.get('cmsId')!.touched)">
+                        <small class="form-text text-danger"
+                               *ngIf="editForm.get('cmsId')?.errors?.required">
+                        This field is required.
+                        </small>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" for="field_cmsDirectoryName">Cms Directory Name</label>
+                    <input type="text" class="form-control" name="cmsDirectoryName" id="field_cmsDirectoryName"
+                           formControlName="cmsDirectoryName"/>
+                    <div *ngIf="editForm.get('cmsDirectoryName')!.invalid && (editForm.get('cmsDirectoryName')!.dirty || editForm.get('cmsDirectoryName')!.touched)">
+                        <small class="form-text text-danger"
+                               *ngIf="editForm.get('cmsDirectoryName')?.errors?.required">
+                        This field is required.
+                        </small>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" for="field_transportPackageId">Transport Package Id</label>
+                    <input type="number" class="form-control" name="transportPackageId" id="field_transportPackageId"
+                           formControlName="transportPackageId"/>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" for="field_receiptId">Receipt Id</label>
+                    <input type="text" class="form-control" name="receiptId" id="field_receiptId"
+                           formControlName="receiptId"/>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" for="field_messageTypeId">Message Type Id</label>
+                    <input type="number" class="form-control" name="messageTypeId" id="field_messageTypeId"
+                           formControlName="messageTypeId"/>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" for="field_responseCode">Response Code</label>
+                    <input type="number" class="form-control" name="responseCode" id="field_responseCode"
+                           formControlName="responseCode"/>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" for="field_attemps">Attemps</label>
+                    <input type="number" class="form-control" name="attemps" id="field_attemps"
+                           formControlName="attemps"/>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" for="field_lastTimeOfAttemps">Last Time Of Attemps</label>
+                    <div class="input-group">
+                        <input id="field_lastTimeOfAttemps" type="text" class="form-control" name="lastTimeOfAttemps" ngbDatepicker #lastTimeOfAttempsDp="ngbDatepicker" formControlName="lastTimeOfAttemps"/>
+                        <span class="input-group-append">
+                            <button type="button" class="btn btn-secondary" (click)="lastTimeOfAttempsDp.toggle()"><fa-icon icon="calendar-alt"></fa-icon></button>
+                        </span>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" for="field_createdAt">Created At</label>
+                    <div class="input-group">
+                        <input id="field_createdAt" type="text" class="form-control" name="createdAt" ngbDatepicker #createdAtDp="ngbDatepicker" formControlName="createdAt"/>
+                        <span class="input-group-append">
+                            <button type="button" class="btn btn-secondary" (click)="createdAtDp.toggle()"><fa-icon icon="calendar-alt"></fa-icon></button>
+                        </span>
+                    </div>
+                    <div *ngIf="editForm.get('createdAt')!.invalid && (editForm.get('createdAt')!.dirty || editForm.get('createdAt')!.touched)">
+                        <small class="form-text text-danger"
+                               *ngIf="editForm.get('createdAt')?.errors?.required">
+                        This field is required.
+                        </small>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" for="field_updatedAt">Updated At</label>
+                    <div class="input-group">
+                        <input id="field_updatedAt" type="text" class="form-control" name="updatedAt" ngbDatepicker #updatedAtDp="ngbDatepicker" formControlName="updatedAt"/>
+                        <span class="input-group-append">
+                            <button type="button" class="btn btn-secondary" (click)="updatedAtDp.toggle()"><fa-icon icon="calendar-alt"></fa-icon></button>
+                        </span>
+                    </div>
+                    <div *ngIf="editForm.get('updatedAt')!.invalid && (editForm.get('updatedAt')!.dirty || editForm.get('updatedAt')!.touched)">
+                        <small class="form-text text-danger"
+                               *ngIf="editForm.get('updatedAt')?.errors?.required">
+                        This field is required.
+                        </small>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" for="field_transportPackageId">Transport Package Id</label>
+                    <select class="form-control" id="field_transportPackageId" name="transportPackageId" formControlName="transportPackageId">
+                        <option [ngValue]="null"></option>
+                        <option [ngValue]="transportPackageOption.id === editForm.get('transportPackageId')!.value?.id ? editForm.get('transportPackageId')!.value : transportPackageOption" *ngFor="let transportPackageOption of transportpackageids; trackBy: trackById">{{ transportPackageOption.id }}</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" for="field_receiptId">Receipt Id</label>
+                    <select class="form-control" id="field_receiptId" name="receiptId" formControlName="receiptId">
+                        <option [ngValue]="null"></option>
+                        <option [ngValue]="receiptOption.id === editForm.get('receiptId')!.value?.id ? editForm.get('receiptId')!.value : receiptOption" *ngFor="let receiptOption of receiptids; trackBy: trackById">{{ receiptOption.id }}</option>
+                    </select>
+                </div>
+            </div>
+
+            <div>
+                <button type="button" id="cancel-save" class="btn btn-secondary" (click)="previousState()">
+                    <fa-icon icon="ban"></fa-icon>&nbsp;<span>Cancel</span>
+                </button>
+
+                <button type="submit" id="save-entity" [disabled]="editForm.invalid || isSaving" class="btn btn-primary">
+                    <fa-icon icon="save"></fa-icon>&nbsp;<span>Save</span>
+                </button>
+            </div>
+        </form>
+    </div>
+</div>

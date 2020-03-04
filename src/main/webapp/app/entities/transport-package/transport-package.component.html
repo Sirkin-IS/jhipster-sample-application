@@ -1,0 +1,89 @@
+<div>
+    <h2 id="page-heading">
+        <span>Transport Packages</span>
+
+        <button id="jh-create-entity" class="btn btn-primary float-right jh-create-entity create-transport-package" [routerLink]="['/transport-package/new']">
+            <fa-icon icon="plus"></fa-icon>
+            <span>
+            Create a new Transport Package
+            </span>
+        </button>
+    </h2>
+
+    <jhi-alert-error></jhi-alert-error>
+
+    <jhi-alert></jhi-alert>
+
+    <div class="alert alert-warning" id="no-result" *ngIf="transportPackages?.length === 0">
+        <span>No transportPackages found</span>
+    </div>
+
+    <div class="table-responsive" id="entities" *ngIf="transportPackages?.length > 0">
+        <table class="table table-striped" aria-describedby="page-heading">
+            <thead>
+                <tr>
+                    <th scope="col" ><span>ID</span></th>
+                    <th scope="col" ><span>Transport Package Id</span></th>
+                    <th scope="col" ><span>Direction Id</span></th>
+                    <th scope="col" ><span>Operator Id</span></th>
+                    <th scope="col" ><span>Answer Code</span></th>
+                    <th scope="col" ><span>Answer Content</span></th>
+                    <th scope="col" ><span>Attemps</span></th>
+                    <th scope="col" ><span>Last Time Of Attemps</span></th>
+                    <th scope="col" ><span>Content</span></th>
+                    <th scope="col" ><span>Created At</span></th>
+                    <th scope="col" ><span>Id</span></th>
+                    <th scope="col" ><span>Id</span></th>
+                    <th scope="col"></th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let transportPackage of transportPackages ;trackBy: trackId">
+                    <td><a [routerLink]="['/transport-package', transportPackage.id, 'view']">{{ transportPackage.id }}</a></td>
+                    <td>{{ transportPackage.transportPackageId }}</td>
+                    <td>{{ transportPackage.directionId }}</td>
+                    <td>{{ transportPackage.operatorId }}</td>
+                    <td>{{ transportPackage.answerCode }}</td>
+                    <td>{{ transportPackage.answerContent }}</td>
+                    <td>{{ transportPackage.attemps }}</td>
+                    <td>{{ transportPackage.lastTimeOfAttemps | date:'mediumDate' }}</td>
+                    <td>{{ transportPackage.content }}</td>
+                    <td>{{ transportPackage.createdAt | date:'mediumDate' }}</td>
+                    <td>
+                        <div *ngIf="transportPackage.id">
+                            <a [routerLink]="['/transport-package-repeat', transportPackage.id?.id, 'view']" >{{ transportPackage.id?.id }}</a>
+                        </div>
+                    </td>
+                    <td>
+                        <div *ngIf="transportPackage.id">
+                            <a [routerLink]="['/bad-incoming-transport-package', transportPackage.id?.id, 'view']" >{{ transportPackage.id?.id }}</a>
+                        </div>
+                    </td>
+                    <td class="text-right">
+                        <div class="btn-group">
+                            <button type="submit"
+                                    [routerLink]="['/transport-package', transportPackage.id, 'view']"
+                                    class="btn btn-info btn-sm">
+                                <fa-icon icon="eye"></fa-icon>
+                                <span class="d-none d-md-inline">View</span>
+                            </button>
+
+                            <button type="submit"
+                                    [routerLink]="['/transport-package', transportPackage.id, 'edit']"
+                                    class="btn btn-primary btn-sm">
+                                <fa-icon icon="pencil-alt"></fa-icon>
+                                <span class="d-none d-md-inline">Edit</span>
+                            </button>
+
+                            <button type="submit" (click)="delete(transportPackage)"
+                                    class="btn btn-danger btn-sm">
+                                <fa-icon icon="times"></fa-icon>
+                                <span class="d-none d-md-inline">Delete</span>
+                            </button>
+                        </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>

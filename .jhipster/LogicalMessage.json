@@ -1,0 +1,128 @@
+{
+    "name": "LogicalMessage",
+    "fields": [
+        {
+            "fieldName": "ownerId",
+            "fieldType": "Integer",
+            "fieldValidateRules": [
+                "required"
+            ]
+        },
+        {
+            "fieldName": "documentId",
+            "fieldType": "String",
+            "fieldValidateRules": [
+                "required"
+            ]
+        },
+        {
+            "fieldName": "eventId",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "directionId",
+            "fieldType": "Integer",
+            "fieldValidateRules": [
+                "required"
+            ]
+        },
+        {
+            "fieldName": "cmsId",
+            "fieldType": "String",
+            "fieldValidateRules": [
+                "required"
+            ]
+        },
+        {
+            "fieldName": "cmsDirectoryName",
+            "fieldType": "String",
+            "fieldValidateRules": [
+                "required"
+            ]
+        },
+        {
+            "fieldName": "transportPackageId",
+            "fieldType": "Integer"
+        },
+        {
+            "fieldName": "receiptId",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "messageTypeId",
+            "fieldType": "Integer"
+        },
+        {
+            "fieldName": "responseCode",
+            "fieldType": "Integer"
+        },
+        {
+            "fieldName": "attemps",
+            "fieldType": "Integer"
+        },
+        {
+            "fieldName": "lastTimeOfAttemps",
+            "fieldType": "LocalDate"
+        },
+        {
+            "fieldName": "createdAt",
+            "fieldType": "LocalDate",
+            "fieldValidateRules": [
+                "required"
+            ]
+        },
+        {
+            "fieldName": "updatedAt",
+            "fieldType": "LocalDate",
+            "fieldValidateRules": [
+                "required"
+            ]
+        }
+    ],
+    "relationships": [
+        {
+            "relationshipType": "one-to-one",
+            "otherEntityName": "transportPackage",
+            "otherEntityRelationshipName": "transportPackageId",
+            "relationshipName": "transportPackageId",
+            "otherEntityField": "id",
+            "ownerSide": true
+        },
+        {
+            "relationshipType": "one-to-one",
+            "otherEntityName": "receipt",
+            "otherEntityRelationshipName": "id",
+            "relationshipName": "receiptId",
+            "otherEntityField": "id",
+            "ownerSide": true
+        },
+        {
+            "relationshipType": "one-to-many",
+            "otherEntityName": "direction",
+            "otherEntityRelationshipName": "id",
+            "relationshipName": "directionId"
+        },
+        {
+            "relationshipType": "one-to-many",
+            "otherEntityName": "cMS",
+            "otherEntityRelationshipName": "id",
+            "relationshipName": "cmsId"
+        },
+        {
+            "relationshipType": "one-to-many",
+            "otherEntityName": "messageType",
+            "otherEntityRelationshipName": "id",
+            "relationshipName": "messageTypeId"
+        }
+    ],
+    "changelogDate": "20200304075300",
+    "entityTableName": "logical_message",
+    "dto": "no",
+    "pagination": "no",
+    "service": "no",
+    "jpaMetamodelFiltering": false,
+    "fluentMethods": true,
+    "readOnly": false,
+    "clientRootFolder": "",
+    "applications": "*"
+}

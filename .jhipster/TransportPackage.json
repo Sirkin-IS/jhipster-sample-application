@@ -1,0 +1,92 @@
+{
+    "name": "TransportPackage",
+    "fields": [
+        {
+            "fieldName": "transportPackageId",
+            "fieldType": "Integer",
+            "fieldValidateRules": [
+                "required"
+            ]
+        },
+        {
+            "fieldName": "directionId",
+            "fieldType": "Integer",
+            "fieldValidateRules": [
+                "required"
+            ]
+        },
+        {
+            "fieldName": "operatorId",
+            "fieldType": "String",
+            "fieldValidateRules": [
+                "required"
+            ]
+        },
+        {
+            "fieldName": "answerCode",
+            "fieldType": "Integer"
+        },
+        {
+            "fieldName": "answerContent",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "attemps",
+            "fieldType": "Integer"
+        },
+        {
+            "fieldName": "lastTimeOfAttemps",
+            "fieldType": "LocalDate"
+        },
+        {
+            "fieldName": "content",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "createdAt",
+            "fieldType": "LocalDate",
+            "fieldValidateRules": [
+                "required"
+            ]
+        }
+    ],
+    "relationships": [
+        {
+            "relationshipType": "one-to-many",
+            "otherEntityName": "operators",
+            "otherEntityRelationshipName": "id",
+            "relationshipName": "operatorId"
+        },
+        {
+            "relationshipType": "one-to-one",
+            "otherEntityName": "logicalMessage",
+            "otherEntityRelationshipName": "transportPackageId",
+            "relationshipName": "transportPackageId",
+            "ownerSide": false
+        },
+        {
+            "relationshipType": "many-to-one",
+            "otherEntityName": "transportPackageRepeat",
+            "otherEntityRelationshipName": "transportPackageId",
+            "relationshipName": "id",
+            "otherEntityField": "id"
+        },
+        {
+            "relationshipType": "many-to-one",
+            "otherEntityName": "badIncomingTransportPackage",
+            "otherEntityRelationshipName": "transportPackageId",
+            "relationshipName": "id",
+            "otherEntityField": "id"
+        }
+    ],
+    "changelogDate": "20200304075500",
+    "entityTableName": "transport_package",
+    "dto": "no",
+    "pagination": "no",
+    "service": "no",
+    "jpaMetamodelFiltering": false,
+    "fluentMethods": true,
+    "readOnly": false,
+    "clientRootFolder": "",
+    "applications": "*"
+}

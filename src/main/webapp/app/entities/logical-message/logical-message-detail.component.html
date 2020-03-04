@@ -1,0 +1,94 @@
+<div class="row justify-content-center">
+    <div class="col-8">
+        <div *ngIf="logicalMessage">
+            <h2><span>Logical Message</span> {{ logicalMessage.id }}</h2>
+
+            <hr>
+
+            <jhi-alert-error></jhi-alert-error>
+
+            <dl class="row-md jh-entity-details">
+                <dt><span>Owner Id</span></dt>
+                <dd>
+                    <span>{{ logicalMessage.ownerId }}</span>
+                </dd>
+                <dt><span>Document Id</span></dt>
+                <dd>
+                    <span>{{ logicalMessage.documentId }}</span>
+                </dd>
+                <dt><span>Event Id</span></dt>
+                <dd>
+                    <span>{{ logicalMessage.eventId }}</span>
+                </dd>
+                <dt><span>Direction Id</span></dt>
+                <dd>
+                    <span>{{ logicalMessage.directionId }}</span>
+                </dd>
+                <dt><span>Cms Id</span></dt>
+                <dd>
+                    <span>{{ logicalMessage.cmsId }}</span>
+                </dd>
+                <dt><span>Cms Directory Name</span></dt>
+                <dd>
+                    <span>{{ logicalMessage.cmsDirectoryName }}</span>
+                </dd>
+                <dt><span>Transport Package Id</span></dt>
+                <dd>
+                    <span>{{ logicalMessage.transportPackageId }}</span>
+                </dd>
+                <dt><span>Receipt Id</span></dt>
+                <dd>
+                    <span>{{ logicalMessage.receiptId }}</span>
+                </dd>
+                <dt><span>Message Type Id</span></dt>
+                <dd>
+                    <span>{{ logicalMessage.messageTypeId }}</span>
+                </dd>
+                <dt><span>Response Code</span></dt>
+                <dd>
+                    <span>{{ logicalMessage.responseCode }}</span>
+                </dd>
+                <dt><span>Attemps</span></dt>
+                <dd>
+                    <span>{{ logicalMessage.attemps }}</span>
+                </dd>
+                <dt><span>Last Time Of Attemps</span></dt>
+                <dd>
+                    <span>{{ logicalMessage.lastTimeOfAttemps }}</span>
+                </dd>
+                <dt><span>Created At</span></dt>
+                <dd>
+                    <span>{{ logicalMessage.createdAt }}</span>
+                </dd>
+                <dt><span>Updated At</span></dt>
+                <dd>
+                    <span>{{ logicalMessage.updatedAt }}</span>
+                </dd>
+                <dt><span>Transport Package Id</span></dt>
+                <dd>
+                    <div *ngIf="logicalMessage.transportPackageId">
+                        <a [routerLink]="['/transport-package', logicalMessage.transportPackageId?.id, 'view']">{{ logicalMessage.transportPackageId?.id }}</a>
+                    </div>
+                </dd>
+                <dt><span>Receipt Id</span></dt>
+                <dd>
+                    <div *ngIf="logicalMessage.receiptId">
+                        <a [routerLink]="['/receipt', logicalMessage.receiptId?.id, 'view']">{{ logicalMessage.receiptId?.id }}</a>
+                    </div>
+                </dd>
+            </dl>
+
+            <button type="submit"
+                    (click)="previousState()"
+                    class="btn btn-info">
+                <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span>Back</span>
+            </button>
+
+            <button type="button"
+                    [routerLink]="['/logical-message', logicalMessage.id, 'edit']"
+                    class="btn btn-primary">
+                <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span>Edit</span>
+            </button>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,46 @@
+<div class="row justify-content-center">
+    <div class="col-8">
+        <div *ngIf="transportPackageRepeat">
+            <h2><span>Transport Package Repeat</span> {{ transportPackageRepeat.id }}</h2>
+
+            <hr>
+
+            <jhi-alert-error></jhi-alert-error>
+
+            <dl class="row-md jh-entity-details">
+                <dt><span>Transport Package Id</span></dt>
+                <dd>
+                    <span>{{ transportPackageRepeat.transportPackageId }}</span>
+                </dd>
+                <dt><span>Repeat Num</span></dt>
+                <dd>
+                    <span>{{ transportPackageRepeat.repeatNum }}</span>
+                </dd>
+                <dt><span>Created At</span></dt>
+                <dd>
+                    <span>{{ transportPackageRepeat.createdAt }}</span>
+                </dd>
+                <dt><span>Answer Code</span></dt>
+                <dd>
+                    <span>{{ transportPackageRepeat.answerCode }}</span>
+                </dd>
+                <dt><span>Answer Content</span></dt>
+                <dd>
+                    <span>{{ transportPackageRepeat.answerContent }}</span>
+                </dd>
+            </dl>
+
+            <button type="submit"
+                    (click)="previousState()"
+                    class="btn btn-info">
+                <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span>Back</span>
+            </button>
+
+            <button type="button"
+                    [routerLink]="['/transport-package-repeat', transportPackageRepeat.id, 'edit']"
+                    class="btn btn-primary">
+                <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span>Edit</span>
+            </button>
+        </div>
+    </div>
+</div>

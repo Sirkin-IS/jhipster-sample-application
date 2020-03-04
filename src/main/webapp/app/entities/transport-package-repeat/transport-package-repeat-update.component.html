@@ -1,0 +1,102 @@
+<div class="row justify-content-center">
+    <div class="col-8">
+        <form name="editForm" role="form" novalidate (ngSubmit)="save()" [formGroup]="editForm">
+            <h2 id="jhi-transport-package-repeat-heading">Create or edit a Transport Package Repeat</h2>
+
+            <div>
+                <jhi-alert-error></jhi-alert-error>
+
+                <div class="form-group" [hidden]="!editForm.get('id')!.value">
+                    <label for="id">ID</label>
+                    <input type="text" class="form-control" id="id" name="id" formControlName="id" readonly />
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" for="field_transportPackageId">Transport Package Id</label>
+                    <input type="number" class="form-control" name="transportPackageId" id="field_transportPackageId"
+                           formControlName="transportPackageId"/>
+                    <div *ngIf="editForm.get('transportPackageId')!.invalid && (editForm.get('transportPackageId')!.dirty || editForm.get('transportPackageId')!.touched)">
+                        <small class="form-text text-danger"
+                               *ngIf="editForm.get('transportPackageId')?.errors?.required">
+                        This field is required.
+                        </small>
+                        <small class="form-text text-danger"
+                            [hidden]="!editForm.get('transportPackageId')?.errors?.number">
+                            This field should be a number.
+                        </small>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" for="field_repeatNum">Repeat Num</label>
+                    <input type="number" class="form-control" name="repeatNum" id="field_repeatNum"
+                           formControlName="repeatNum"/>
+                    <div *ngIf="editForm.get('repeatNum')!.invalid && (editForm.get('repeatNum')!.dirty || editForm.get('repeatNum')!.touched)">
+                        <small class="form-text text-danger"
+                               *ngIf="editForm.get('repeatNum')?.errors?.required">
+                        This field is required.
+                        </small>
+                        <small class="form-text text-danger"
+                            [hidden]="!editForm.get('repeatNum')?.errors?.number">
+                            This field should be a number.
+                        </small>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" for="field_createdAt">Created At</label>
+                    <div class="input-group">
+                        <input id="field_createdAt" type="text" class="form-control" name="createdAt" ngbDatepicker #createdAtDp="ngbDatepicker" formControlName="createdAt"/>
+                        <span class="input-group-append">
+                            <button type="button" class="btn btn-secondary" (click)="createdAtDp.toggle()"><fa-icon icon="calendar-alt"></fa-icon></button>
+                        </span>
+                    </div>
+                    <div *ngIf="editForm.get('createdAt')!.invalid && (editForm.get('createdAt')!.dirty || editForm.get('createdAt')!.touched)">
+                        <small class="form-text text-danger"
+                               *ngIf="editForm.get('createdAt')?.errors?.required">
+                        This field is required.
+                        </small>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" for="field_answerCode">Answer Code</label>
+                    <input type="number" class="form-control" name="answerCode" id="field_answerCode"
+                           formControlName="answerCode"/>
+                    <div *ngIf="editForm.get('answerCode')!.invalid && (editForm.get('answerCode')!.dirty || editForm.get('answerCode')!.touched)">
+                        <small class="form-text text-danger"
+                               *ngIf="editForm.get('answerCode')?.errors?.required">
+                        This field is required.
+                        </small>
+                        <small class="form-text text-danger"
+                            [hidden]="!editForm.get('answerCode')?.errors?.number">
+                            This field should be a number.
+                        </small>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" for="field_answerContent">Answer Content</label>
+                    <input type="text" class="form-control" name="answerContent" id="field_answerContent"
+                           formControlName="answerContent"/>
+                    <div *ngIf="editForm.get('answerContent')!.invalid && (editForm.get('answerContent')!.dirty || editForm.get('answerContent')!.touched)">
+                        <small class="form-text text-danger"
+                               *ngIf="editForm.get('answerContent')?.errors?.required">
+                        This field is required.
+                        </small>
+                    </div>
+                </div>
+            </div>
+
+            <div>
+                <button type="button" id="cancel-save" class="btn btn-secondary" (click)="previousState()">
+                    <fa-icon icon="ban"></fa-icon>&nbsp;<span>Cancel</span>
+                </button>
+
+                <button type="submit" id="save-entity" [disabled]="editForm.invalid || isSaving" class="btn btn-primary">
+                    <fa-icon icon="save"></fa-icon>&nbsp;<span>Save</span>
+                </button>
+            </div>
+        </form>
+    </div>
+</div>

@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<databaseChangeLog
+    xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.6.xsd">
+    <!--
+        Added the constraints for entity LogicalMessage.
+    -->
+    <changeSet id="20200304075300-2" author="jhipster">
+        
+        <addForeignKeyConstraint baseColumnNames="transport_package_id_id"
+                                 baseTableName="logical_message"
+                                 constraintName="fk_logical_message_transport_package_id_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="transport_package"/>
+
+        <addForeignKeyConstraint baseColumnNames="receipt_id_id"
+                                 baseTableName="logical_message"
+                                 constraintName="fk_logical_message_receipt_id_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="receipt"/>
+
+    </changeSet>
+</databaseChangeLog>

@@ -1,0 +1,45 @@
+<div class="row justify-content-center">
+    <div class="col-8">
+        <div *ngIf="badIncomingTransportPackage">
+            <h2><span>Bad Incoming Transport Package</span> {{ badIncomingTransportPackage.id }}</h2>
+
+            <hr>
+
+            <jhi-alert-error></jhi-alert-error>
+
+            <dl class="row-md jh-entity-details">
+                <dt><span>Transport Package Id</span></dt>
+                <dd>
+                    <span>{{ badIncomingTransportPackage.transportPackageId }}</span>
+                </dd>
+                <dt><span>Date</span></dt>
+                <dd>
+                    <span>{{ badIncomingTransportPackage.date }}</span>
+                </dd>
+                <dt><span>Content</span></dt>
+                <dd>
+                    <div *ngIf="badIncomingTransportPackage.content">
+                        <a (click)="openFile(badIncomingTransportPackage.contentContentType!, badIncomingTransportPackage.content)">open</a>
+                        {{ badIncomingTransportPackage.contentContentType }}, {{ byteSize(badIncomingTransportPackage.content) }}
+                    </div>
+                </dd>
+                <dt><span>Answer Code</span></dt>
+                <dd>
+                    <span>{{ badIncomingTransportPackage.answerCode }}</span>
+                </dd>
+            </dl>
+
+            <button type="submit"
+                    (click)="previousState()"
+                    class="btn btn-info">
+                <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span>Back</span>
+            </button>
+
+            <button type="button"
+                    [routerLink]="['/bad-incoming-transport-package', badIncomingTransportPackage.id, 'edit']"
+                    class="btn btn-primary">
+                <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span>Edit</span>
+            </button>
+        </div>
+    </div>
+</div>

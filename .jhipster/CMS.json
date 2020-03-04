@@ -1,0 +1,51 @@
+{
+    "name": "CMS",
+    "fields": [
+        {
+            "fieldName": "fileId",
+            "fieldType": "String",
+            "fieldValidateRules": [
+                "required"
+            ]
+        },
+        {
+            "fieldName": "messageCount",
+            "fieldType": "Integer",
+            "fieldValidateRules": [
+                "required"
+            ]
+        },
+        {
+            "fieldName": "createdAt",
+            "fieldType": "LocalDate",
+            "fieldValidateRules": [
+                "required"
+            ]
+        }
+    ],
+    "relationships": [
+        {
+            "relationshipType": "one-to-many",
+            "otherEntityName": "hbaseFile",
+            "otherEntityRelationshipName": "fileId",
+            "relationshipName": "fileId"
+        },
+        {
+            "relationshipType": "many-to-one",
+            "otherEntityName": "logicalMessage",
+            "otherEntityRelationshipName": "cmsId",
+            "relationshipName": "id",
+            "otherEntityField": "id"
+        }
+    ],
+    "changelogDate": "20200304075200",
+    "entityTableName": "cms",
+    "dto": "no",
+    "pagination": "no",
+    "service": "no",
+    "jpaMetamodelFiltering": false,
+    "fluentMethods": true,
+    "readOnly": false,
+    "clientRootFolder": "",
+    "applications": "*"
+}

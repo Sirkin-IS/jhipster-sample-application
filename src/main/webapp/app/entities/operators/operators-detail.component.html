@@ -1,0 +1,52 @@
+<div class="row justify-content-center">
+    <div class="col-8">
+        <div *ngIf="operators">
+            <h2><span>Operators</span> {{ operators.id }}</h2>
+
+            <hr>
+
+            <jhi-alert-error></jhi-alert-error>
+
+            <dl class="row-md jh-entity-details">
+                <dt><span>Operator Id</span></dt>
+                <dd>
+                    <span>{{ operators.operatorId }}</span>
+                </dd>
+                <dt><span>Url</span></dt>
+                <dd>
+                    <span>{{ operators.url }}</span>
+                </dd>
+                <dt><span>Second Url</span></dt>
+                <dd>
+                    <span>{{ operators.secondUrl }}</span>
+                </dd>
+                <dt><span>Title</span></dt>
+                <dd>
+                    <span>{{ operators.title }}</span>
+                </dd>
+                <dt><span>Alias</span></dt>
+                <dd>
+                    <span>{{ operators.alias }}</span>
+                </dd>
+                <dt><span>Id</span></dt>
+                <dd>
+                    <div *ngIf="operators.id">
+                        <a [routerLink]="['/transport-package', operators.id?.id, 'view']">{{ operators.id?.id }}</a>
+                    </div>
+                </dd>
+            </dl>
+
+            <button type="submit"
+                    (click)="previousState()"
+                    class="btn btn-info">
+                <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span>Back</span>
+            </button>
+
+            <button type="button"
+                    [routerLink]="['/operators', operators.id, 'edit']"
+                    class="btn btn-primary">
+                <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span>Edit</span>
+            </button>
+        </div>
+    </div>
+</div>
