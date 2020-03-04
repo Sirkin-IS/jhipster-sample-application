@@ -1,0 +1,119 @@
+entity MessageType {
+	id Integer required //pk
+    name String required
+}
+
+entity Direction {
+  id Integer required //pk
+  name String required
+}
+
+entity DocumentStatus {
+ id Integer required //pk
+ name String required
+}
+
+entity CMS {
+  id String required //pk
+  fileId String required
+  messageCount Integer required
+  createdAt LocalDate required
+}
+
+entity LogicalMessage {
+    ownerId Integer required //pk
+    documentId String required //pk
+    eventId String //pk
+    directionId Integer required //pk
+    cmsId  String required 
+    cmsDirectoryName String required
+    transportPackageId Integer
+    receiptId String
+    messageTypeId Integer
+    responseCode Integer
+    attemps Integer 
+    lastTimeOfAttemps LocalDate
+    createdAt LocalDate required
+    updatedAt LocalDate  required
+}
+
+entity Receipt {
+  id String required//pk
+  cmsId Integer required
+  receiptTypeId Integer required
+  receiptDate LocalDate required
+  createdAt LocalDate required
+}
+
+entity TransportPackage {
+   transportPackageId Integer required//pk
+   directionId Integer required
+   operatorId String required
+   answerCode Integer
+   answerContent String
+   attemps Integer
+   lastTimeOfAttemps LocalDate
+   content String
+   createdAt LocalDate required
+}
+
+entity Operators {
+   operatorId String required //pk
+   url String  required
+   secondUrl String required
+   title String required
+   alias String required
+   id Integer required
+}
+
+entity TransportPackageRepeat {
+  transportPackageId Integer required //pk
+  repeatNum Integer required//pk
+  createdAt LocalDate required
+  answerCode Integer required
+  answerContent String required
+}
+
+
+entity BadIncomingTransportPackage {
+  transportPackageId Integer required //pk
+  date LocalDate required
+  content Blob required
+  answerCode Integer required
+}
+
+entity DocumentHistory {
+  id Integer required//pk
+  ownerId Integer required 
+  directionId Integer required
+  documentId Integer required
+  statusId Integer required
+  date LocalDate required
+}
+
+entity HbaseFile {
+  fileId Integer  required
+  content String  required
+}
+
+relationship OneToMany {
+	LogicalMessage{directionId} to Direction{id},
+    LogicalMessage{cmsId} to CMS{id},
+    LogicalMessage{messageTypeId} to MessageType{id},
+    
+    TransportPackageRepeat{transportPackageId} to TransportPackage{id},
+    DocumentHistory{statusId} to DocumentStatus{id},
+    
+    TransportPackage{operatorId} to Operators{id},
+    BadIncomingTransportPackage{transportPackageId} to TransportPackage{id},
+    CMS{fileId} to HbaseFile{fileId}
+}
+
+relationship OneToOne {
+    LogicalMessage{transportPackageId} to TransportPackage{transportPackageId},
+    LogicalMessage{receiptId} to  Receipt{id},
+}
+
+
+
+
